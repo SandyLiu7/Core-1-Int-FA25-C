@@ -1,5 +1,5 @@
 /* Import Google Fonts */
-@import url('https://fonts.googleapis.com/css2?family=Lora:wght@400;500;600&family=Inter:wght@300;400;500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
 
 /* CSS Custom Properties */
 :root {
@@ -25,6 +25,27 @@
   --space-xl: 2rem;
   --space-2xl: 3rem;
   --space-3xl: 4rem;
+
+/* Typography */
+      --font-heading: "DM Sans", sans-serif;
+      --font-body: "PT Serif", serif;
+body {
+      font-family: var(--font-body);
+      font-weight: 400;
+      line-height: 1.6;
+      color: var(--gray-800);
+      background-color: var(--gray-50);
+    }
+
+    /* === TYPOGRAPHY === */
+    h1, h2, h3, h4, h5, h6 {
+      font-family: var(--font-heading);
+      font-weight: 700;
+      line-height: 1.2;
+      color: var(--color-secondary);
+      margin-bottom: 1rem;
+    }
+
   
   /* Layout */
   --max-width: 680px;
