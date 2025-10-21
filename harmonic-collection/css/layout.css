@@ -111,7 +111,7 @@ main.three-column {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   gap: 2rem;
-  max-width: 1400px;
+  max-width: 2400px;
 }
 
 main.three-column section {
@@ -252,3 +252,5 @@ main.photo-grid .photo-caption {
     font-size: 1rem;
   }
 }
+
+body {background-color: rgb(208, 236, 255);}
