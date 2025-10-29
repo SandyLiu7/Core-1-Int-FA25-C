@@ -1,43 +1,151 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../css/layout.css">
-    <title>Double-Skin Milk</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <link rel="stylesheet" href="../css/layout.css" />
+  <title>Double-Skin Milk</title>
 </head>
 <body>
-  <main class="two-column">
-    <section>
+
+  <!-- fixed back button (path points back to project root index.html) -->
+  <a href="../../index.html" class="back-button">← Back to Gallery</a>
+
+  <main class="entry-container">
+
+    <!-- HERO: title + image + description (description directly after image) -->
+    <section class="entry-hero">
       <h1>Double-Skin Milk</h1>
-      <img src="../img/double-skin-milk.jpg" >
+      <img src="../img/double-skin-milk.jpg" alt="Double-Skin Milk">
+      <p class="entry-description">
+        Double-Skin Milk originated in Shunde, Guangdong Province at first, approximately during the Qing Dynasty.
+        The Shunde area is rich in water buffaloes. The milk has a high fat content and a rich taste.
+        The locals have derived many special desserts from this kind of milk, among which double-skin milk is included.
+        The reason why double-skin milk is called "Double Skin" is that it naturally forms two layers of milk skin during the production process.
+        Because people in Shunde pay great attention to diet, double-skin milk has gradually become the local "signature dessert".
+        It is even called one of the "Three Treasures of Shunde" (Shunde-style Fish Sashimi, Jun'an Steamed Whole Pig, double-skin milk).
+      </p>
     </section>
 
-     <section>
- <h2>Instructions</h2>
-    <p style="color: var(--color-tertiary);">1.Heat the milk and cream over low heat until it bubbles.</p>
-        <p style="color: var(--color-tertiary);">2.Pour into four small bowls and let a skin form on top.</p>
-        <p style="color: var(--color-tertiary);">3.Whisk egg whites and sugar until smooth.</p>
-        <p style="color: var(--color-tertiary);">4.Lift a small opening in the skin and pour the milk beneath into the egg mixture, leaving a thin layer of milk and the skin intact.</p>
-        <p style="color: var(--color-tertiary);">5.Strain the egg mixture twice and carefully pour it back into the bowls, keeping the skin on top.</p>
-        <p style="color: var(--color-tertiary);">6.Steam for 30–35 minutes and serve warm.</p>
-      <p style="color: var(--color-tertiary);">7. Add the toppings.</p>
-</section>
-
-    <section>
-      <p style="color: var(--color-secondary);">Double-Skin Milk originated in Shunde, Guangdong Province at first, approximately during the Qing Dynasty. The Shunde area is rich in water buffaloes. The milk has a high fat content and a rich taste. The locals have derived many special desserts from this kind of milk, among which double-skin milk is included. The reason why double-skin milk is called "Double Skin" is that it naturally forms two layers of milk skin during the production process. Because people in Shunde pay great attention to diet, double-skin milk has gradually become the local "signature dessert". It is even called one of the "Three Treasures of Shunde" (shunde-style Fish Sashimi, Jun 'an Steamed Whole Pig, double-skin milk).</p>
-    </section>
-    
-    <section>
-      <h2>Ingredients</h2>
-      <p style="color: var(--color-highlight);">450g buffalo milk</p>
-   <p style="color: var(--color-highlight);">150g heavy cream</p>
-    <p style="color: var(--color-highlight);">4 egg whites</p>
-    <p style="color: var(--color-highlight);">50g sugar</p>
-  <p style="color: var(--color-highlight);">Any toppings (such as red beans or mango)</p>
+    <!-- Instructions (collapsible) -->
+    <section class="collapsible-section">
+      <div class="collapsible" data-key="instructions">
+        <span>Instructions</span>
+        <span class="collapsible-icon" aria-hidden="true"></span>
+      </div>
+      <div class="content" id="instructions-content">
+        <p>1. Heat the milk and cream over low heat until it bubbles.</p>
+        <p>2. Pour into four small bowls and let a skin form on top.</p>
+        <p>3. Whisk egg whites and sugar until smooth.</p>
+        <p>4. Lift a small opening in the skin and pour the milk beneath into the egg mixture, leaving a thin layer of milk and the skin intact.</p>
+        <p>5. Strain the egg mixture twice and carefully pour it back into the bowls, keeping the skin on top.</p>
+        <p>6. Steam for 30–35 minutes and serve warm.</p>
+        <p>7. Add the toppings.</p>
+      </div>
     </section>
 
-   
+    <!-- Ingredients (collapsible) with placeholder images -->
+    <section class="collapsible-section">
+      <div class="collapsible" data-key="ingredients">
+        <span>Ingredients</span>
+        <span class="collapsible-icon" aria-hidden="true"></span>
+      </div>
+
+      <div class="content" id="ingredients-content">
+        <div class="ingredients-list">
+          <div class="ingredient-item">
+            <div class="ingredient-text">450g buffalo milk</div>
+            <div class="ingredient-img" aria-hidden="true"></div>
+          </div>
+
+          <div class="ingredient-item">
+            <div class="ingredient-text">150g heavy cream</div>
+            <div class="ingredient-img" aria-hidden="true"></div>
+          </div>
+
+          <div class="ingredient-item">
+            <div class="ingredient-text">4 egg whites</div>
+            <div class="ingredient-img" aria-hidden="true"></div>
+          </div>
+
+          <div class="ingredient-item">
+            <div class="ingredient-text">50g sugar</div>
+            <div class="ingredient-img" aria-hidden="true"></div>
+          </div>
+
+          <div class="ingredient-item">
+  <div class="ingredient-text">Any toppings (such as red beans or mango)</div>
+  <div class="ingredient-img">
+    <img src="../img/double-skin-milk.jpg" alt="ginger-milk-curd">
+  </div>
+</div>
+
+        </div>
+      </div>
+    </section>
+
   </main>
+
+  <script>
+    // Collapsible behavior:
+    // - On desktop (width >= 900) content opens by default
+    // - On mobile it remains collapsed by default
+    // - Clicking the title toggles open/close and icon rotation
+    (function() {
+      const breakpoint = 900;
+      const collapBoxes = document.querySelectorAll('.collapsible');
+
+      function openContent(el) {
+        const content = el.nextElementSibling;
+        el.classList.add('active');
+        content.classList.add('open');
+        // set an explicit maxHeight so CSS transition works
+        content.style.maxHeight = content.scrollHeight + 'px';
+      }
+
+      function closeContent(el) {
+        const content = el.nextElementSibling;
+        el.classList.remove('active');
+        content.classList.remove('open');
+        content.style.maxHeight = null;
+      }
+
+      // initialize according to viewport width
+      function initState() {
+        const desktop = window.innerWidth >= breakpoint;
+        collapBoxes.forEach(box => {
+          const content = box.nextElementSibling;
+          if (desktop) {
+            openContent(box);
+          } else {
+            closeContent(box);
+          }
+        });
+      }
+
+      // click handlers
+      collapBoxes.forEach(box => {
+        box.addEventListener('click', () => {
+          const isActive = box.classList.contains('active');
+          if (isActive) {
+            closeContent(box);
+          } else {
+            openContent(box);
+          }
+        });
+      });
+
+      // init on load
+      window.addEventListener('load', initState);
+      // also update on resize (debounced)
+      let rTimeout = null;
+      window.addEventListener('resize', () => {
+        clearTimeout(rTimeout);
+        rTimeout = setTimeout(() => {
+          initState();
+        }, 120);
+      });
+    })();
+  </script>
 </body>
 </html>
