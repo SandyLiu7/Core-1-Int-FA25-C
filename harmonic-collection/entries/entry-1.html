@@ -69,23 +69,53 @@
   </main>
 
   <script>
-    // improved collapsible JS (prevents accidental mobile triggering)
-    document.querySelectorAll('.collapsible').forEach((collapsible) => {
-      let touchStartY = 0, touchEndY = 0;
-      collapsible.addEventListener('touchstart', e => touchStartY = e.touches[0].clientY);
-      collapsible.addEventListener('touchend', e => {
-        touchEndY = e.changedTouches[0].clientY;
-        if (Math.abs(touchEndY - touchStartY) < 10) togglePanel();
-      });
-      collapsible.addEventListener('click', togglePanel);
+  // collapsible panels: mobile & desktop safe
+  document.querySelectorAll('.collapsible').forEach((collapsible) => {
+    let isDragging = false;
+    let startY = 0;
 
-      function togglePanel() {
-        collapsible.classList.toggle('active');
-        const content = collapsible.nextElementSibling;
-        const isOpen = content.classList.toggle('open');
-        content.style.maxHeight = isOpen ? content.scrollHeight + 'px' : null;
+    collapsible.addEventListener('touchstart', e => {
+      isDragging = false;
+      startY = e.touches[0].clientY;
+    });
+
+    collapsible.addEventListener('touchmove', e => {
+      const moveY = e.touches[0].clientY;
+      if (Math.abs(moveY - startY) > 10) isDragging = true; // detect scroll
+    });
+
+    collapsible.addEventListener('touchend', e => {
+      if (!isDragging) togglePanel();
+    });
+
+    collapsible.addEventListener('click', togglePanel);
+
+    function togglePanel() {
+      collapsible.classList.toggle('active');
+      const content = collapsible.nextElementSibling;
+      const isOpen = content.classList.toggle('open');
+      content.style.maxHeight = isOpen ? content.scrollHeight + 'px' : null;
+    }
+  });
+
+  // initialize panels: desktop open, mobile closed
+  function initPanels() {
+    const breakpoint = 900;
+    const desktop = window.innerWidth >= breakpoint;
+    document.querySelectorAll('.collapsible').forEach(collapsible => {
+      const content = collapsible.nextElementSibling;
+      if (desktop) {
+        collapsible.classList.add('active');
+        content.classList.add('open');
+        content.style.maxHeight = content.scrollHeight + 'px';
+      } else {
+        collapsible.classList.remove('active');
+        content.classList.remove('open');
+        content.style.maxHeight = null;
       }
     });
-  </script>
-</body>
-</html>
+  }
+
+  window.addEventListener('load', initPanels);
+  window.addEventListener('resize', () => setTimeout(initPanels, 120));
+</script>
