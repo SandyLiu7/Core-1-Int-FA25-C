@@ -69,48 +69,27 @@
   </main>
 
   <script>
-  // collapsible panels: mobile & desktop safe
   document.querySelectorAll('.collapsible').forEach((collapsible) => {
-    let isDragging = false;
-    let startY = 0;
-
-    collapsible.addEventListener('touchstart', e => {
-      isDragging = false;
-      startY = e.touches[0].clientY;
-    });
-
-    collapsible.addEventListener('touchmove', e => {
-      const moveY = e.touches[0].clientY;
-      if (Math.abs(moveY - startY) > 10) isDragging = true; // detect scroll
-    });
-
-    collapsible.addEventListener('touchend', e => {
-      if (!isDragging) togglePanel();
-    });
-
-    collapsible.addEventListener('click', togglePanel);
-
-    function togglePanel() {
-      collapsible.classList.toggle('active');
+    collapsible.addEventListener('click', () => {
       const content = collapsible.nextElementSibling;
       const isOpen = content.classList.toggle('open');
+      collapsible.classList.toggle('active', isOpen);
       content.style.maxHeight = isOpen ? content.scrollHeight + 'px' : null;
-    }
+    });
   });
 
-  // initialize panels: desktop open, mobile closed
   function initPanels() {
     const breakpoint = 900;
     const desktop = window.innerWidth >= breakpoint;
     document.querySelectorAll('.collapsible').forEach(collapsible => {
       const content = collapsible.nextElementSibling;
       if (desktop) {
-        collapsible.classList.add('active');
         content.classList.add('open');
+        collapsible.classList.add('active');
         content.style.maxHeight = content.scrollHeight + 'px';
       } else {
-        collapsible.classList.remove('active');
         content.classList.remove('open');
+        collapsible.classList.remove('active');
         content.style.maxHeight = null;
       }
     });
