@@ -2,38 +2,29 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <link rel="stylesheet" href="../css/layout.css" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Double-Skin Milk</title>
+  <link rel="stylesheet" href="../css/layout.css" />
 </head>
 <body>
-
-  <!-- fixed back button (path points back to project root index.html) -->
   <a href="../../index.html" class="back-button">← Back to Gallery</a>
 
   <main class="entry-container">
-
-    <!-- HERO: title + image + description (description directly after image) -->
     <section class="entry-hero">
       <h1>Double-Skin Milk</h1>
-      <img src="../img/double-skin-milk.jpg" alt="Double-Skin Milk">
-      <p class="entry-description">
-        Double-Skin Milk originated in Shunde, Guangdong Province at first, approximately during the Qing Dynasty.
-        The Shunde area is rich in water buffaloes. The milk has a high fat content and a rich taste.
-        The locals have derived many special desserts from this kind of milk, among which double-skin milk is included.
-        The reason why double-skin milk is called "Double Skin" is that it naturally forms two layers of milk skin during the production process.
-        Because people in Shunde pay great attention to diet, double-skin milk has gradually become the local "signature dessert".
-        It is even called one of the "Three Treasures of Shunde" (Shunde-style Fish Sashimi, Jun'an Steamed Whole Pig, double-skin milk).
-      </p>
+      <img src="../img/double-skin-milk.jpg" alt="Double-Skin Milk" />
+      <div class="entry-description">
+        Double-Skin Milk originated in Shunde, Guangdong Province at first, approximately during the Qing Dynasty. The Shunde area is rich in water buffaloes. The milk has a high fat content and a rich taste. The locals have derived many special desserts from this kind of milk, among which double-skin milk is included. The reason why double-skin milk is called "Double Skin" is that it naturally forms two layers of milk skin during the production process. Because people in Shunde pay great attention to diet, double-skin milk has gradually become the local "signature dessert". It is even called one of the "Three Treasures of Shunde" (Shunde-style Fish Sashimi, Jun'an Steamed Whole Pig, double-skin milk).
+      </div>
     </section>
 
-    <!-- Instructions (collapsible) -->
+    <!-- Instructions -->
     <section class="collapsible-section">
-      <div class="collapsible" data-key="instructions">
-        <span>Instructions</span>
-        <span class="collapsible-icon" aria-hidden="true"></span>
+      <div class="collapsible">
+        Instructions
+        <div class="collapsible-icon"></div>
       </div>
-      <div class="content" id="instructions-content">
+      <div class="content">
         <p>1. Heat the milk and cream over low heat until it bubbles.</p>
         <p>2. Pour into four small bowls and let a skin form on top.</p>
         <p>3. Whisk egg whites and sugar until smooth.</p>
@@ -44,108 +35,57 @@
       </div>
     </section>
 
-    <!-- Ingredients (collapsible) with placeholder images -->
+    <!-- Ingredients -->
     <section class="collapsible-section">
-      <div class="collapsible" data-key="ingredients">
-        <span>Ingredients</span>
-        <span class="collapsible-icon" aria-hidden="true"></span>
+      <div class="collapsible">
+        Ingredients
+        <div class="collapsible-icon"></div>
       </div>
-
-      <div class="content" id="ingredients-content">
+      <div class="content">
         <div class="ingredients-list">
           <div class="ingredient-item">
             <div class="ingredient-text">450g buffalo milk</div>
-            <div class="ingredient-img" aria-hidden="true"></div>
+            <div class="ingredient-img"><img src="../img/sample1.jpg" alt="milk"></div>
           </div>
-
           <div class="ingredient-item">
             <div class="ingredient-text">150g heavy cream</div>
-            <div class="ingredient-img" aria-hidden="true"></div>
+            <div class="ingredient-img"><img src="../img/sample2.jpg" alt="cream"></div>
           </div>
-
           <div class="ingredient-item">
             <div class="ingredient-text">4 egg whites</div>
-            <div class="ingredient-img" aria-hidden="true"></div>
+            <div class="ingredient-img"><img src="../img/sample3.jpg" alt="egg whites"></div>
           </div>
-
           <div class="ingredient-item">
             <div class="ingredient-text">50g sugar</div>
-            <div class="ingredient-img" aria-hidden="true"></div>
+            <div class="ingredient-img"><img src="../img/sample4.jpg" alt="sugar"></div>
           </div>
-
           <div class="ingredient-item">
-  <div class="ingredient-text">Any toppings (such as red beans or mango)</div>
-  <div class="ingredient-img">
-    <img src="../img/double-skin-milk.jpg" alt="ginger-milk-curd">
-  </div>
-</div>
-
+            <div class="ingredient-text">Any toppings (such as red beans or mango)</div>
+            <div class="ingredient-img"><img src="../img/sample5.jpg" alt="toppings"></div>
+          </div>
         </div>
       </div>
     </section>
-
   </main>
 
   <script>
-    // Collapsible behavior:
-    // - On desktop (width >= 900) content opens by default
-    // - On mobile it remains collapsed by default
-    // - Clicking the title toggles open/close and icon rotation
-    (function() {
-      const breakpoint = 900;
-      const collapBoxes = document.querySelectorAll('.collapsible');
-
-      function openContent(el) {
-        const content = el.nextElementSibling;
-        el.classList.add('active');
-        content.classList.add('open');
-        // set an explicit maxHeight so CSS transition works
-        content.style.maxHeight = content.scrollHeight + 'px';
-      }
-
-      function closeContent(el) {
-        const content = el.nextElementSibling;
-        el.classList.remove('active');
-        content.classList.remove('open');
-        content.style.maxHeight = null;
-      }
-
-      // initialize according to viewport width
-      function initState() {
-        const desktop = window.innerWidth >= breakpoint;
-        collapBoxes.forEach(box => {
-          const content = box.nextElementSibling;
-          if (desktop) {
-            openContent(box);
-          } else {
-            closeContent(box);
-          }
-        });
-      }
-
-      // click handlers
-      collapBoxes.forEach(box => {
-        box.addEventListener('click', () => {
-          const isActive = box.classList.contains('active');
-          if (isActive) {
-            closeContent(box);
-          } else {
-            openContent(box);
-          }
-        });
+    // improved collapsible JS (prevents accidental mobile triggering)
+    document.querySelectorAll('.collapsible').forEach((collapsible) => {
+      let touchStartY = 0, touchEndY = 0;
+      collapsible.addEventListener('touchstart', e => touchStartY = e.touches[0].clientY);
+      collapsible.addEventListener('touchend', e => {
+        touchEndY = e.changedTouches[0].clientY;
+        if (Math.abs(touchEndY - touchStartY) < 10) togglePanel();
       });
+      collapsible.addEventListener('click', togglePanel);
 
-      // init on load
-      window.addEventListener('load', initState);
-      // also update on resize (debounced)
-      let rTimeout = null;
-      window.addEventListener('resize', () => {
-        clearTimeout(rTimeout);
-        rTimeout = setTimeout(() => {
-          initState();
-        }, 120);
-      });
-    })();
+      function togglePanel() {
+        collapsible.classList.toggle('active');
+        const content = collapsible.nextElementSibling;
+        const isOpen = content.classList.toggle('open');
+        content.style.maxHeight = isOpen ? content.scrollHeight + 'px' : null;
+      }
+    });
   </script>
 </body>
 </html>

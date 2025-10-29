@@ -296,14 +296,14 @@ header .author {
   justify-content: center;
 }
 
-/* 让图片适应框，保持美观比例 */
 .ingredient-img img {
   width: 100%;
   height: 100%;
-  object-fit: contain; /* ✅ 图片自动裁切铺满 */
+  object-fit: cover;
   border-radius: 12px;
   display: block;
 }
+
 
 
 /* -------------------- RESPONSIVE BEHAVIOR -------------------- */
@@ -322,4 +322,10 @@ header .author {
   .entry-hero h1{ font-size: 1.5rem; margin: 16px; }
   .entry-description{ font-size: 0.95rem; padding: 14px 14px 20px; }
   .ingredient-img{ width: 60px; height: 60px; flex: 0 0 60px; }
+}
+
+
+/* prevent accidental tap highlight on mobile */
+.collapsible, .collapsible * {
+  -webkit-tap-highlight-color: transparent;
 }
